@@ -28,49 +28,57 @@ function playRound(player1, player2) {
     console.log("Result of hand number " + callCount)
 
     if (player1.hand === "rock" && player2.hand === "paper") {
-        console.log(player2.name + " wins"); return player2.name;
+        console.log(player2.name + " wins"); return player2;
     } else if (player1.hand === "rock" && player2.hand === "scissors") {
-        console.log(player1.name + " wins"); return player1.name;
+        console.log(player1.name + " wins"); return player1;
     } else if (player1.hand === player2.hand) {
-        console.log("It's a tie"); return "null"
+        console.log("It's a tie"); return null
     } else if (player1.hand === "scissors" && player2.hand === "paper") {
-        console.log(player1.name + " wins"); return player1.name
+        console.log(player1.name + " wins"); return player1
     } else if (player1.hand === "scissors" && player2.hand === "rock") {
-        console.log(player2.name + " wins"); return player2.name
+        console.log(player2.name + " wins"); return player2
     } else if (player1.hand === "paper" && player2.hand === "rock") {
-        console.log(player1.name + " wins"); return player1.name
+        console.log(player1.name + " wins"); return player1
+    } else if (player1.hand === "paper" && player2.hand === "scissors") {
+        console.log(player2.name + " wins"); return player2
     } else {
-        console.log(player2.name + " wins"); return player2.name
+        console.log(player2.name + " wins"); return player2
 
     }
 
 }
 
-playRound(player1, player2);
-console.log(callCount);
 
-playRound(player1, player2);
-console.log(callCount);
+function playGame(player1, player2, playUntil) {
 
-playRound(player1, player2);
-console.log(callCount);
 
-playRound(player1, player2);
-console.log(callCount);
+    let player1count = 0;
+    let player2count = 0;
 
-playRound(player1, player2);
-console.log(callCount);
+    do {
+        const winner = playRound(player1, player2);
+        if (winner === player1) {
+            player1count += 1;
 
-// let playUntil;
+        } else if (winner === player2) {
+            player2count += 1;
 
-// function playGame(player1, player2, playUntil) {
-//     if (playUntil <= 0) {
-//         playRound;
-//         playGame(player1, player2, playUntil - 1);
-//     } else {
-//         return 1;
-//     }
-// }
-//  playGame(player1, player2, 5);
+        }
 
-// test
+
+    }
+    while (player1count < playUntil && player2count < playUntil);
+    return player1count > player2count ? player1 : player2;
+}
+
+const totalWinner = playGame(player1, player2, 5);
+
+console.log(`${totalWinner.name} wins the game!`);
+
+// playGame(player1, player2, 5);
+
+
+
+
+
+
